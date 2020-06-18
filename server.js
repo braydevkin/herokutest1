@@ -1,11 +1,6 @@
-// server.js
-// where your node app starts
-
-// we've started you off with Express (https://expressjs.com/)
-// but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
 const express = require("express");
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express();
 app.use(cors())
@@ -15,8 +10,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true})
-const registerModel = require('./models/registerModel')
+// mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true})
+// const registerModel = require('./models/registerModel')
 
 
 app.get("/", (req, res) => {
@@ -28,10 +23,7 @@ app.post("/newagent", (req, res) => {
 
     const intentname = req.body.queryResult.intent.displayName;
 
-    if (intentname == 'servicos') {
-        res.json({ "fulfillmentText": "Deu certo cambada" })
-    }
-    else if (intentname == 'boas-vindas') {
+   if (intentname == 'boas-vindas') {
         res.json(
             {
                 "fulfillmentMessages": [
@@ -50,21 +42,21 @@ app.post("/newagent", (req, res) => {
 
         )
     }
-    else if(intentname == 'cadastrar'){
-       async function saveUser(){
-           try{
-              const newUser = await registerModel.create({
-                name: user_name,
-                email: user_email
-            }) 
-           }
-            catch{
-                res.json({ "fulfillmentText": "Houve um erro no seu cadastro" })
-            }
-        }
-        saveUser()
-        res.json({ "fulfillmentText": "Cadastro efetuado com sucesso !" })
-    }
+    // else if(intentname == 'cadastrar'){
+    //    async function saveUser(){
+    //        try{
+    //           const newUser = await registerModel.create({
+    //             name: user_name,
+    //             email: user_email
+    //         }) 
+    //        }
+    //         catch{
+    //             res.json({ "fulfillmentText": "Houve um erro no seu cadastro" })
+    //         }
+    //     }
+    //     saveUser()
+    //     res.json({ "fulfillmentText": "Cadastro efetuado com sucesso !" })
+    // }
 })
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
