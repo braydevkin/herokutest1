@@ -14,8 +14,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
 }))
-mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true})
 
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true})
 const registerModel = require('./models/registerModel')
 
 
@@ -61,9 +61,9 @@ app.post("/newagent", (req, res) => {
             catch{
                 res.json({ "fulfillmentText": "Houve um erro no seu cadastro" })
             }
-            saveUser()
-            res.json({ "fulfillmentText": "Cadastro efetuado com sucesso !" })
         }
+        saveUser()
+        res.json({ "fulfillmentText": "Cadastro efetuado com sucesso !" })
     }
 })
 // listen for requests :)
