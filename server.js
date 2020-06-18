@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({
 }))
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true})
 
+const registerModel = require('./models/registerModel')
 
 
 app.get("/", (req, res) => {
@@ -50,7 +51,19 @@ app.post("/newagent", (req, res) => {
         )
     }
     else if(intentname == 'cadastrar'){
-
+       async function saveUser(){
+           try{
+              const newUser = await registerModel.create({
+                name: user_name,
+                email: user_email
+            }) 
+           }
+            catch{
+                res.json({ "fulfillmentText": "Houve um erro no seu cadastro" })
+            }
+            saveUser()
+            res.json({ "fulfillmentText": "Cadastro efetuado com sucesso !" })
+        }
     }
 })
 // listen for requests :)
