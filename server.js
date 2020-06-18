@@ -9,7 +9,10 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGO_URL, { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 const registerModel = require('./models/registerModel')
 
 
@@ -17,7 +20,7 @@ app.get("/", (req, res) => {
     res.send('Teste Heroku')
 });
 
-app.post("/newagent", (req, res) => {
+app.post("/newagent", async (req, res) => {
 
     const intentname = req.body.queryResult.intent.displayName;
 
@@ -25,7 +28,7 @@ app.post("/newagent", (req, res) => {
         const userName = req.body.queryResult.parameters['user_name']
         const userEmail = req.body.queryResult.parameters['user_email']
 
-        registerModel.create({
+        await registerModel.create({
             name: userName,
             email: userEmail
         })
