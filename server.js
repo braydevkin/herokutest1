@@ -24,23 +24,17 @@ app.post("/newagent", (req, res) => {
     const intentname = req.body.queryResult.intent.displayName;
 
     if (intentname == 'cadastrar') {
-        var userName = request.body.queryResult.parameters['user_name']
-        var userEmail = request.body.queryResult.parameters['user_email']
+        var userName = req.body.queryResult.parameters['user_name']
+        var userEmail = req.body.queryResult.parameters['user_email']
 
-        try {
-            registerModel.create({
-                name: userName,
-                email: userEmail
-            })
-        }
-        catch{
-            res.json({ "fulfillmentText": "Houve um erro no seu cadastro" })
-        }
+        registerModel.create({
+            name: userName,
+            email: userEmail
+        })
+        res.json({ "fulfillmentText": "Cadastro efetuado com sucesso 100%!" })
+        // listen for requests :)
+        const listener = app.listen(process.env.PORT || 3000, () => {
+            console.log("Your app is listening on port " + listener.address().port);
+        });
     }
-    saveUser()
-    res.json({ "fulfillmentText": "Cadastro efetuado com sucesso !" })
 })
-// listen for requests :)
-const listener = app.listen(process.env.PORT || 3000, () => {
-    console.log("Your app is listening on port " + listener.address().port);
-});
