@@ -18,7 +18,6 @@ app.get("/", (req, res) => {
     res.send('Teste Heroku')
 });
 
-
 app.post("/newagent", (req, res) => {
 
     const intentname = req.body.queryResult.intent.displayName;
@@ -32,6 +31,7 @@ app.post("/newagent", (req, res) => {
             email: userEmail
         })
         res.json({ "fulfillmentText": "Cadastro efetuado com sucesso 100%!" })
+        
         // listen for requests :)
         const listener = app.listen(process.env.PORT || 3000, () => {
             console.log("Your app is listening on port " + listener.address().port);
