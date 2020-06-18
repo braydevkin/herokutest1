@@ -22,8 +22,8 @@ app.post("/newagent", (req, res) => {
     const intentname = req.body.queryResult.intent.displayName;
 
     if (intentname == 'cadastrar') {
-        var userName = req.body.queryResult.parameters['user_name']
-        var userEmail = req.body.queryResult.parameters['user_email']
+        const userName = req.body.queryResult.parameters['user_name']
+        const userEmail = req.body.queryResult.parameters['user_email']
 
         registerModel.create({
             name: userName,
@@ -32,7 +32,7 @@ app.post("/newagent", (req, res) => {
         res.json({ "fulfillmentText": "Cadastro efetuado com sucesso 100%!" })
         
         // listen for requests :)
-        const listener = app.listen(process.env.PORT || 3000, () => {
+        const listener = app.listen(process.env.PORT, () => {
             console.log("Your app is listening on port " + listener.address().port);
         });
     }
