@@ -4,6 +4,8 @@
 // we've started you off with Express (https://expressjs.com/)
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
+const express = require("express");
+const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express();
 app.use(cors())
@@ -12,6 +14,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
 }))
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true})
+
 
 
 app.get("/", (req, res) => {
@@ -25,6 +29,28 @@ app.post("/newagent", (req, res) => {
 
     if (intentname == 'servicos') {
         res.json({ "fulfillmentText": "Deu certo cambada" })
+    }
+    else if (intentname == 'boas-vindas') {
+        res.json(
+            {
+                "fulfillmentMessages": [
+                    {
+                        "card": {
+                            "buttons": [
+                                {
+                                    "text": "cadastrar",
+                                    "button text": "quero me cadastrar !!"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+
+        )
+    }
+    else if(intentname == 'cadastrar'){
+
     }
 })
 // listen for requests :)
