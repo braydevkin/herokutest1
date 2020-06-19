@@ -33,9 +33,11 @@ app.post("/newagent", async (req, res) => {
             email: userEmail
         })
         res.json({ "fulfillmentText": "Cadastro efetuado com sucesso 100%!" })
-
-
     }
+})
+app.get('/dados', async (req,res)=>{
+    const users =  await registerModel.find(req.body)
+    return res.send(users)
 })
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
