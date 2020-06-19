@@ -8,8 +8,13 @@ module.exports = {
         const intentname = req.body.queryResult.intent.displayName;
 
         if (intentname == 'cadastrar') {
+            const userSay = req.body.queryResult.queryText
             const userName = await req.body.queryResult.parameters['user_name']
             const userEmail = await req.body.queryResult.parameters['user_email']
+
+            if(userSay == 'cadastrar','quero me cadastrar', 'efetuar cadastro'){
+                res.json({ "fulfillmentText": "Por favor infome seu nome completo" })
+            }
 
             try {
                 await registerModel.create({
