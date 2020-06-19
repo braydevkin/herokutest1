@@ -5,7 +5,7 @@ module.exports = {
         res.send('Olá ChatBot')
     },
     async Store(req, res) {
-        const userSay = req.body.queryResult.queryText
+        const userSay = req.body.queryResult.queryText;
         const intentname = req.body.queryResult.intent.displayName;
 
         if (userSay == intentname) {
@@ -24,6 +24,20 @@ module.exports = {
                     res.json({ "fulfillmentText": "Não foi possível efetuar seu cadastro, tente novamente" })
                 }
             }
+        }
+        else if (intentname == 'boas-vindas') {
+            res.json({ "fulfillmentText": "Por favor escolha uma das opçoes abaixo" })
+            {
+                {
+                    "buttons" = [
+                        {
+                            "text": "Cadastrar",
+                            "postback": "Cadastrar"
+                        }
+                    ]
+                }
+            }
+
         }
     },
     async Show(req, res) {
