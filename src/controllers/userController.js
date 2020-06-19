@@ -5,26 +5,24 @@ module.exports = {
         res.send('Olá ChatBot')
     },
     async Store(req, res) {
+        const userSay = req.body.queryResult.queryText
         const intentname = req.body.queryResult.intent.displayName;
 
-        if (intentname == 'cadastrar') {
-            const userSay = req.body.queryResult.queryText
-            const userName = await req.body.queryResult.parameters['user_name']
-            const userEmail = await req.body.queryResult.parameters['user_email']
+        if (userSay == intentname) {
+            if (intentname == 'cadastrar') {
+                const userName = await req.body.queryResult.parameters['user_name']
+                const userEmail = await req.body.queryResult.parameters['user_email']
 
-            if(userSay == 'cadastrar','quero me cadastrar', 'efetuar cadastro'){
-                res.json({ "fulfillmentText": "Por favor infome seu nome completo" })
-            }
-
-            try {
-                await registerModel.create({
-                    name: userName,
-                    email: userEmail
-                })
-                res.json({ "fulfillmentText": "Obrigado por se registrar" })
-            }
-            catch{
-                res.json({ "fulfillmentText": "Não foi possível efetuar seu cadastro, tente novamente" })
+                try {
+                    await registerModel.create({
+                        name: userName,
+                        email: userEmail
+                    })
+                    res.json({ "fulfillmentText": "Obrigado por se registrar" })
+                }
+                catch{
+                    res.json({ "fulfillmentText": "Não foi possível efetuar seu cadastro, tente novamente" })
+                }
             }
         }
     },
