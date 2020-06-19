@@ -27,17 +27,6 @@ module.exports = {
         }
         else if (intentname == 'boas-vindas') {
             res.json({ "fulfillmentText": "Por favor escolha uma das opçoes abaixo" })
-            {
-                {
-                    "buttons" = [
-                        {
-                            "text": "Cadastrar",
-                            "postback": "Cadastrar"
-                        }
-                    ]
-                }
-            }
-
         }
     },
     async Show(req, res) {
