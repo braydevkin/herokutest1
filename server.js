@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-mongoose.connect(process.env.MONGO_URL, { 
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -25,18 +25,19 @@ app.post("/newagent", async (req, res) => {
     const intentname = req.body.queryResult.intent.displayName;
 
     if (intentname == 'cadastrar') {
-        const userName = req.body.queryResult.parameters['user_name']
-        const userEmail = req.body.queryResult.parameters['user_email']
+        const userName = await req.body.queryResult.parameters['user_name']
+        const userEmail = await req.body.queryResult.parameters['user_email']
 
         await registerModel.create({
             name: userName,
             email: userEmail
         })
         res.json({ "fulfillmentText": "Cadastro efetuado com sucesso 100%!" })
-        
-        // listen for requests :)
-        const listener = app.listen(process.env.PORT, () => {
-            console.log("Your app is listening on port " + listener.address().port);
-        });
+
+
     }
 })
+// listen for requests :)
+const listener = app.listen(process.env.PORT, () => {
+    console.log("Your app is listening on port " + listener.address().port);
+});
