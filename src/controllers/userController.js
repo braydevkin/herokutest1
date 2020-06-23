@@ -26,23 +26,7 @@ module.exports = {
             }
         }
         else if (intentname == 'boas-vindas') {
-            res.json({
-                "fulfillmentMessages": [
-                  {
-                    "card": {
-                      "title": "card title",
-                      "subtitle": "card text",
-                      "imageUri": "https://example.com/images/example.png",
-                      "buttons": [
-                        {
-                          "text": "button text",
-                          "postback": "https://example.com/path/for/end-user/to/follow"
-                        }
-                      ]
-                    }
-                  }
-                ]
-              })
+            res.send('Olá sou seu  agente virtual como posso te ajudar ?')
         }
     },
     async Show(req, res) {
