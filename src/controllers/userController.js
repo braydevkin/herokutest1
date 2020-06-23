@@ -26,7 +26,7 @@ module.exports = {
             }
         }
         else if (intentname == 'boas-vindas') {
-            res.json({ "fulfillmentText": "Por favor escolha uma das opçoes abaixo" })
+            res.json({ "fulfillmentText": "Escolha uma das  opções do menu" })
         }
     },
     async Show(req, res) {
