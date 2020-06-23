@@ -37,6 +37,11 @@ module.exports = {
         catch{
             res.send('Não foi possível encontrar os usuários, tente novamente')
         }
-
+    },
+    async sendMessage(req, res){
+        await req.body.queryResult.queryText;
+    },
+    async  receiveMessage(req,res){
+        await req.body.queryResult.fulfillmentText
     }
 }
