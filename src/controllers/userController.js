@@ -40,8 +40,10 @@ module.exports = {
     },
     async sendMessage(req, res){
         await req.body.queryResult.queryText;
+        res.send('Enviar')
     },
     async  receiveMessage(req,res){
         await req.body.queryResult.fulfillmentText
+        res.send('Receber')
     }
 }
